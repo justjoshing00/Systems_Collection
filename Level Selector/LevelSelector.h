@@ -10,23 +10,10 @@
 
 namespace Processes 
 {
-	inline void Field(DataClasses::FieldData data)
-	{
-		std::cout << "field process engaged";
-		std::cout << data.Read();
-	}
-	inline void Menu(DataClasses::MenuData data)
-	{
-		std::cout << "menu process engaged";
-	}
-	inline void Combat(DataClasses::CombatData data)
-	{
-		std::cout << "combat process engaged";
-	}
-	inline void Pause(DataClasses::PauseData data)
-	{
-		std::cout << "paused process engaged";
-	}
+	 void Field(DataClasses::FieldData data);
+	 void Menu(DataClasses::MenuData data);
+	 void Combat(DataClasses::CombatData data);
+	 void Pause(DataClasses::PauseData data);
 }
 
 
@@ -38,12 +25,7 @@ enum  Levels
 	Level2,
 	Level3,
 	Level4,
-	Level5,
-	Level6,
-	Level7,
-	Level8,
-	Level9,
-	Level10,
+
 };
 enum Encounters
 {
@@ -52,22 +34,6 @@ enum Encounters
 	Encounter2,
 	Encounter3,
 	Encounter4,
-	Encounter5,
-	Encounter6,
-	Encounter7,
-	Encounter8,
-	Encounter9,
-	Encounter10,
-	Encounter11,
-	Encounter12,
-	Encounter13,
-	Encounter14,
-	Encounter15,
-	Encounter16,
-	Encounter17,
-	Encounter18,
-	Encounter19,
-	Encounter20,
 };
 
 
@@ -81,6 +47,7 @@ namespace GameLoop
 		switch (enc)
 		{
 			//TODO:Do something with the zero case here
+			//TODO make this into a helper function i can reuse in each case
 		case 1:
 			if (lvl == 1)
 			{

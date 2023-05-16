@@ -16,14 +16,20 @@ namespace DataClasses
 	class MenuData
 	{
 		int y = 2;
+	public:
+		int Read() { return y; }
 	};
 	class CombatData
 	{
 		int z = 3;
+	public:
+		int Read() { return z; }
 	};
 	class PauseData
 	{
 		int w = 4;
+	public:
+		int Read() { return w; }
 	};
 	using DataVariant = std::variant<FieldData, MenuData, CombatData, PauseData>;
 	using FunctionVariant = std::variant<std::function<void(DataClasses::FieldData)>, std::function<void(DataClasses::MenuData)>,
