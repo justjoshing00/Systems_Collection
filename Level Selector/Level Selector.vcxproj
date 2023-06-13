@@ -131,12 +131,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\..\Desktop\gamesystems\Level select\LevelSelector.cpp" />
-    <ClCompile Include="..\..\..\..\Desktop\gamesystems\Level select\Main.cpp" />
+    <ClInclude Include="DataClasses.h" />
+    <ClInclude Include="LevelSelector.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\..\Desktop\gamesystems\Level select\DataClasses.h" />
-    <ClInclude Include="..\..\..\..\Desktop\gamesystems\Level select\LevelSelector.h" />
+    <ClCompile Include="LevelSelector.cpp" />
+    <ClCompile Include="Main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

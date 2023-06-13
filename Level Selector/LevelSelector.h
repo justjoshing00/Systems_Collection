@@ -1,9 +1,8 @@
 #pragma once
 #include <utility>
 #include <functional>
-#include <string>
 #include <iostream>
-#include <any>
+#include <map>
 #include "DataClasses.h"
 
 
@@ -17,7 +16,7 @@ namespace Processes
 }
 
 
-
+// these enums only exist to create sane human readable names for the levels
 enum  Levels 
 {
 	//i dont knowif level and encounter are the right names anymore
@@ -37,50 +36,27 @@ enum Encounters
 };
 
 
-
 namespace GameLoop
 {
-	//variant of function objects
-	inline std::pair<DataClasses::FunctionVariant,DataClasses::DataVariant> LevelSelector(int enc, int lvl)
+	// Given a level-encounter pair, give me a process and data to pass into that process.
+	// This is a simplified version of this - an actual implementation will be a many to many relationship.
+	// EG: a combat process may need field data in order to determine which enviroment data to load in combat.
+	// This (in theory) makes it easy to swap out processes and add new processes, at the cost of making it harder
+	// to change data. I expect that early on in development, the thing that will change most often and the thing
+	// that will be the most effort to change will be processes rather than data.
+	inline std::pair<DataClasses::DataVariant,DataClasses::FunctionVariant> LevelSelector(int enc, int lvl) 
 	{
-		
-		switch (enc)
+		auto index = std::make_pair(enc, lvl);
+
+		std::map<std::pair<int, int>, std::pair<DataClasses::DataVariant, DataClasses::FunctionVariant>> Lselect =
 		{
-			//TODO:Do something with the zero case here
-			//TODO make this into a helper function i can reuse in each case
-		case 1:
-			if (lvl == 1)
-			{
-				DataClasses::FieldData FData;
-				DataClasses::FunctionVariant ModeFn = Processes::Field;
-				auto Mode = std::make_pair(ModeFn, FData);
-				return Mode; // rename the processes to reflect the modes the game will be in
-			}
-		case 2:
-			if (lvl == 2)
-			{
-				DataClasses::MenuData MData;
-				DataClasses::FunctionVariant ModeFn = Processes::Menu;
-				auto Mode = std::make_pair(ModeFn, MData);
-				return Mode; // rename the processes to reflect the modes the game will be in
-			}
-		case 3:
-			if (lvl == 3)
-			{
-				DataClasses::CombatData CData;
-				DataClasses::FunctionVariant ModeFn = Processes::Combat;
-				auto Mode = std::make_pair(ModeFn, CData);
-				return Mode; // rename the processes to reflect the modes the game will be in
-			}
-		case 4:
-			if (lvl == 4)
-			{
-				DataClasses::PauseData PData;
-				DataClasses::FunctionVariant ModeFn = Processes::Pause;
-				auto Mode = std::make_pair(ModeFn, PData);
-				return Mode; // rename the processes to reflect the modes the game will be in
-			}
-		}
+			{ std::make_pair(1,1),std::make_pair(DataClasses::FieldData{},Processes::Field)},
+			{ std::make_pair(1,2),std::make_pair(DataClasses::MenuData{},Processes::Menu)},
+			{ std::make_pair(2,1),std::make_pair(DataClasses::CombatData{},Processes::Combat)},
+			{ std::make_pair(2,2),std::make_pair(DataClasses::PauseData{},Processes::Pause)},
+		};
+
+		return Lselect.at(index);
+		
 	}
-	
 }

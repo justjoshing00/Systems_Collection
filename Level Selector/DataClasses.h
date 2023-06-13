@@ -32,7 +32,8 @@ namespace DataClasses
 		int Read() { return w; }
 	};
 	using DataVariant = std::variant<FieldData, MenuData, CombatData, PauseData>;
-	using FunctionVariant = std::variant<std::function<void(DataClasses::FieldData)>, std::function<void(DataClasses::MenuData)>,
+	using FunctionVariant = std::variant<std::function<void(DataClasses::FieldData)>, 
+		std::function<void(DataClasses::MenuData)>,
 		std::function<void(DataClasses::CombatData)>,
 		std::function<void(DataClasses::PauseData)>>;
 
